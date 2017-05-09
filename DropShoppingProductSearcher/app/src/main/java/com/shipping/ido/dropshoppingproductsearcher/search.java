@@ -1,9 +1,16 @@
 package com.shipping.ido.dropshoppingproductsearcher;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -29,8 +36,94 @@ public class search extends AppCompatActivity
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        //actionBar.hide();
-}
+
+        handleCreateRoomButton();
+    }
+
+    private void handleCreateRoomButton()
+    {
+        Button createRoomBtn = (Button) findViewById(R.id.SearchButton);
+
+
+        createRoomBtn.setOnClickListener(new View.OnClickListener()
+        {
+            Spinner shoppingOfferSpinner = (Spinner)findViewById(R.id.spinner4);
+
+            String shoppingOffer = shoppingOfferSpinner.getSelectedItem().toString();
+
+
+            Spinner postTimeSpinner = (Spinner)findViewById(R.id.spinner3);
+
+            String postTime = postTimeSpinner.getSelectedItem().toString();
+
+
+            Spinner lookForSpeyficWebSiteSPinner = (Spinner)findViewById(R.id.spinner2);
+
+            String specsificWebsite = lookForSpeyficWebSiteSPinner.getSelectedItem().toString();
+
+            Spinner postTypeSpinner = (Spinner)findViewById(R.id.spinner);
+
+            String postType = postTypeSpinner.getSelectedItem().toString();
+
+            EditText postKeyWordsEditText = (EditText)findViewById(R.id.editText3);
+
+            String postKeyWords = postKeyWordsEditText.getText().toString();
+
+            String url = GetTextStr(shoppingOffer,postTime,specsificWebsite,postType,postKeyWords);
+
+
+
+            public void onClick(View v)
+            {
+                Intent searchingIntent =
+                        new Intent("android.intent.action.VIEW",
+                                Uri.parse(url));
+                startActivity(searchingIntent);
+            }
+        });
+    }
+
+    private String GetTextStr(String shoppingOffer,String postTime,String website,String type,String postkeywords)
+    {
+        String base="https://www.facebook.com/search/str/";
+
+        String searchstr = "";
+        if (website != "") {
+            searchstr = website + '+' + postkeywords;
+        } else if (shoppingOffer != ""){
+            searchstr = shoppingOffer + '+' + postkeywords;
+        } else {
+            searchstr = postkeywords;
+        }
+
+        base += searchstr;
+
+        if (type == "recent") {
+            base += "/stories-keyword/" + postTime + "/date/stories/intersect";
+        }
+        if (type == "all") {
+            base += "/stories-keyword/" + postTime + "/date/stories/intersect";
+        }
+        if (type == "live") {
+            base += "/stories-keyword/intersect/stories-live";
+        }
+        if (type == "pages") {
+            base += "/stories-keyword/stories-publishers";
+        }
+
+        if (type == "shared") {
+            base += "/stories-keyword/" + postTime + "/date/stories/share/stories/intersect";
+        }
+        if (type == "photos") {
+            base += "/stories-keyword/" + postTime + "/date/stories/photo/stories/intersect";
+        }
+        if (type == "videos") {
+            base += "/stories-keyword/" + postTime + "/date/stories/video/stories/intersect";
+        }
+
+        return base;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
