@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "478840660877",
+    "firebase_url": "https://newfirebase-6bcde.firebaseio.com",
+    "project_id": "newfirebase-6bcde",
+    "storage_bucket": "newfirebase-6bcde.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478840660877:android:e26c612ddcdd24a4",
+        "android_client_info": {
+          "package_name": "com.shipping.ido.dropshoppingproductsearcher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478840660877-02781ump9fi5cfdrbgd76mia757l6ab5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJdpfrLFY2tMc_xJ3p0clSQMWxthTwpRA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
